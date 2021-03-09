@@ -22,12 +22,11 @@ class RocketTile extends StatelessWidget {
         onTap: onTap,
         child: Container(
           // Todo: Add padding to all edges of the image
-          padding: null, // Hint EdgeInsets.all might help you
+          padding: EdgeInsets.all(4) ,
           width: width, // This sets width of container to fill the entire screen
           decoration: BoxDecoration(
-            // Todo: Add BorderRadius as a decoration.
             borderRadius:
-                null, // Hint: BorderRadius has a constructor called .circular
+                BorderRadius.circular(50),
           ),
           child: Stack(children: [
             Hero(
@@ -36,31 +35,32 @@ class RocketTile extends StatelessWidget {
               child: ClipRRect(
                 clipBehavior:
                     Clip.antiAlias, // Tells how hard we are cutting the image.
-                // Todo: Add a border radius to the image as well.
-                // Make it equal to its parent
-                borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(25),
                 // Todo: Replace the Text below with an Image.
                 // The first image from the Rocket localImages
                 child:
-                    Text(''), // Hint: The image widget has a .asset constructor
+                    Image.asset(
+                        rocket.localImages.first )
               ),
             ),
             Positioned(
               // Todo: Place the Positioned content at the bottom
-              bottom: null,
+              bottom: 0,
               child: Container(
                   // Todo: Figure out the correct width
                   // Hint: This width should be equal to the outer parent, minus the padding given at the top.
-                  width: null,
+                  width: width - 10,
                   decoration: BoxDecoration(
                       // Todo: Add a Radius to the remaining corners.
                       borderRadius: BorderRadius.only(
                         topRight: Radius.zero,
                         topLeft: Radius.zero,
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
                       ),
                       // Todo: Give me a nice black color, with some opacity
                       color:
-                          null // Hint: The Colors class provide a lot of colors
+                          Colors.black.withOpacity(0.5) // Hint: The Colors class provide a lot of colors
                       ),
                   padding: EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
@@ -79,7 +79,9 @@ class RocketTile extends StatelessWidget {
                           'Add the rocket description here. It should be maximum 2 lines and overflowing text should be cut using ellipsis. The style should be of type subtitle2 and copied with the color white',
                           maxLines: null,
                           overflow: null,
-                          style: null,
+                          style: textTheme.bodyText2.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
