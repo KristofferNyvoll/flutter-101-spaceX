@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rockets/screens/home/rockets/rocket_details_screen.dart';
 import 'package:rockets/services/rocket_service.dart';
 
 import 'rocket_tile.dart';
@@ -25,7 +26,7 @@ class RocketList extends StatelessWidget {
                     // containing the current Rocket
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (context) {
-                      return null;
+                      return RocketDetailsScreen(rocket: rocket);
                     }));
                   })
           ]);

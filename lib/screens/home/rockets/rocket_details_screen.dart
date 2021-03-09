@@ -16,14 +16,14 @@ class RocketDetailsScreen extends StatelessWidget {
 
   // This is also a getter, but defined as normal function.
   // Try to rewrite it to an arrow function.
-  int get _daysSinceFirstFlight {
-    return rocket.firstFlight.difference(DateTime.now()).abs().inDays;
-  }
+  int get _daysSinceFirstFlight =>
+     rocket.firstFlight.difference(DateTime.now()).abs().inDays;
+
   // Here we have multiple lines, and we should use a normal function declaration.
   String get _firstFlightLabel {
     final date = rocket.firstFlight;
     // Todo: Return the date as a string 'dd-mm-yyy'
-    return '';
+    return '${date.day}-${date.month}-${date.year}';
   }
 
   @override
@@ -32,14 +32,18 @@ class RocketDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text(rocket.name),
         // Todo: Add the rocket name as the title of the AppBar.
       ),
       body: ListView(
         children: [
           _ImageHeader(rocket: rocket), // Todo: Finish the implementation of this. (See the private Widget at the end of the file)
           ListTile(
-            title: Text( // Hint: Use the textTheme defined at the top of the build function
-              'Add rocket name here. And style it as a headline6.',
+            title: Text(
+                rocket.name,
+                style: textTheme.headline6.copyWith(
+                  color: Colors.black,
+                ),
             ),
             // The ? : syntax is a one-line if-statement.
             // If the rocket is active, we return the text Active else we return Inactive.
@@ -48,8 +52,9 @@ class RocketDetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Add the rocket description here and style it as a subtitle2.',
+              rocket.description,
               style: textTheme.subtitle2,
+
             ),
           ),
           ListTile(
@@ -68,11 +73,14 @@ class RocketDetailsScreen extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.height_sharp),
-            title: null, // Todo: Add a Text with the rocket height.
+            title: Text("${rocket.height}"), // Todo: Add a Text with the rocket height.
             subtitle: const Text('in height'),
           ),
           const Divider(),
           ListTile(
+            leading: Icon(Icons.cake_outlined),
+            title: Text("${rocket.mass} kg"),
+            subtitle: Text("kg"),
             // Todo: Add a leading Icon suitable for describing the mass of the rocket
             // Todo: Add a title Text with the rocket mass in kg. (No math needed)
             // Todo: Add a subtitle Text with the total mass label
@@ -114,3 +122,12 @@ class _ImageHeader extends StatelessWidget {
     );
   }
 }
+
+/*
+
+      height: 250,
+      child: Hero(
+        tag: "rocket-image-${rocket.id}"
+      )
+      for (final image in rocket.localImages)
+ */
